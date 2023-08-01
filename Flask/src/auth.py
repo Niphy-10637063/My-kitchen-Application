@@ -84,7 +84,7 @@ def register():
    
 
     return jsonify({
-        'message': "OTP has been sent to your email..Please verify the mailID",
+        'message': "User Created..OTP has been sent to your email..Please verify the mailID for successful signin",
         'data': { "email": email
         },
         'success':True,
@@ -128,7 +128,7 @@ def login():
 
             }), HTTP_200_OK
 
-    return jsonify({'message': 'Invalid Username/Password'}), HTTP_400_BAD_REQUEST
+    return jsonify({'message': 'Invalid Username/Password','success':False}), HTTP_400_BAD_REQUEST
 
 @auth.get('/token/refresh')
 @jwt_required(refresh=True)
@@ -163,7 +163,7 @@ def verify_otp():
         if datetime.now() <= user.expiration_time:
             user.isVerified=True
             db.session.commit()
-            return jsonify({'message': 'OTP verified successfully','success':False}), 200
+            return jsonify({'message': 'Email verified successfully','success':False}), 200
         else:
             return jsonify({'message': 'OTP has expired','success':False}), 400
     else:
