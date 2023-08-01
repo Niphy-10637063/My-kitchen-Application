@@ -54,6 +54,7 @@ export class SignInComponent implements OnInit {
           }
         } else {
           this.openSnackBar(error.message, true);
+          this.submitted = false;
         }
       },
     });

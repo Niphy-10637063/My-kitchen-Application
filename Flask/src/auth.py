@@ -76,7 +76,7 @@ def register():
     pwd_hash = generate_password_hash(password)
     otp = str(random.randint(100000, 999999))
     expiration_time = datetime.now() + timedelta(minutes=5)
-    user = User(username=username, password=pwd_hash, email=email,isAdmin=True,otp=otp,isVerified=False,expiration_time=expiration_time)
+    user = User(username=username, password=pwd_hash, email=email,isAdmin=False,otp=otp,isVerified=False,expiration_time=expiration_time)
     sendOTPEmail(email,username,otp)
 
     db.session.add(user)
@@ -128,7 +128,7 @@ def login():
 
             }), HTTP_200_OK
 
-    return jsonify({'message': 'Invalid Username/Password'}), HTTP_401_UNAUTHORIZED
+    return jsonify({'message': 'Invalid Username/Password'}), HTTP_400_BAD_REQUEST
 
 @auth.get('/token/refresh')
 @jwt_required(refresh=True)

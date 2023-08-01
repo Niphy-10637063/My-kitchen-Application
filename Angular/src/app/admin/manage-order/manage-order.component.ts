@@ -70,9 +70,7 @@ export class ManageOrderComponent implements OnInit, AfterViewInit {
 
   getDate(date: any) {
     if (date !== null) {
-      let timestamp = new Date(date).getTime();
-      timestamp = timestamp - 3600000;
-      return this.datePipe.transform(new Date(timestamp), 'dd-MM-yyyy hh:mm a');
+      return this.datePipe.transform(new Date(date), 'dd-MM-yyyy hh:mm a');
     }
     return 'NULL';
   }

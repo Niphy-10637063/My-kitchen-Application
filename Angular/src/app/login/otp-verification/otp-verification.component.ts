@@ -39,7 +39,7 @@ export class OtpVerificationComponent implements OnInit, OnDestroy {
         if (res && res.body && res.body.data) {
           if (res.body.data.expiration_time) {
             const expiry: any =
-              new Date(res.body.data.expiration_time).getTime() - 3600000;
+              new Date(res.body.data.expiration_time).getTime();
             const current: any = new Date().getTime();
             const diff = expiry - current;
             console.log(diff);
