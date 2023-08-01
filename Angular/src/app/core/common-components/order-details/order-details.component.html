@@ -1,0 +1,58 @@
+<h1 mat-dialog-title>
+  <b>Order Details</b>
+</h1>
+<mat-dialog-content>
+  <div
+    class="row ms-3 mt-4"
+    *ngIf="orderDetails && orderDetails.length > 0; else emptyTemplate"
+  >
+    <div class="col-md-12">
+      <div class="p-3 border rounded mt-1 bg-white">
+        <table class="table table-border table-sm table-responsive mt-1">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Product</th>
+              <th scope="col" class="col-qty">Quantity</th>
+              <th scope="col" class="text-end pe-3">Price</th>
+              <th scope="col" class="text-end pe-3">SubTotal</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let orderDetail of orderDetails; let i = index">
+              <td>
+                <img
+                  [src]="orderDetail.imageUrl"
+                  class=""
+                  height="70px"
+                  width="70px"
+                  alt="..."
+                />
+              </td>
+              <td class="pt-4">{{ orderDetail.product }}</td>
+              <td class="pt-4">{{ orderDetail.quantity }}</td>
+              <td class="text-end pe-3 pt-4">
+                $ {{ orderDetail.price | number : "1.2-2" }}
+              </td>
+              <td class="text-end pe-3 pt-4">
+                $
+                {{
+                  orderDetail.price * orderDetail.quantity | number : "1.2-2"
+                }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <ng-template #emptyTemplate>
+    <div class="empty-container text-center mt-5">
+      <div><strong class="fw-bolder fs-4">No details available.</strong></div>
+    </div>
+  </ng-template>
+</mat-dialog-content>
+<mat-dialog-actions class="float-end gap-1">
+  <button class="btn btn-light" mat-dialog-close>Close</button>
+</mat-dialog-actions>

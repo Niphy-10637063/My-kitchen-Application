@@ -1,0 +1,28 @@
+.sign-in {
+    background: linear-gradient(#ffe6e6, #ffff);
+    background-size: cover;
+    .login-container {
+      display: grid;
+      min-height: 80vh;
+      width: 100%;
+      height: 100%;
+      align-content: center;
+      justify-content: center;
+  
+      #loginForm {
+        overflow: hidden;
+        //   height: 280px;
+        width: 300px;
+        border-radius: 10px;
+        border: 1px solid #c32232;
+        padding: 20px;
+        background-color: white;
+        a {
+          text-decoration: none;
+          cursor: pointer;
+          // padding: 3px;
+        }
+      }
+    }
+  }
+  

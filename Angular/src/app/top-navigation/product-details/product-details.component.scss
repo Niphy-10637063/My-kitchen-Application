@@ -1,0 +1,34 @@
+.container {
+  margin-top: 3rem;
+  img {
+    border-radius: 3rem;
+    height: 20rem;
+    margin-top: 1rem;
+    object-fit: cover;
+  }
+  .details {
+    padding: 4rem;
+  }
+}
+.text-align-end {
+  text-align: end;
+}
+.fa-heart-favourite {
+  color: #c32232 !important;
+  cursor: pointer;
+}
+.fa-heart{
+  cursor: pointer;
+}
+.review-btn{
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+.fa-star {
+  color: #f5bd02 !important;
+}
+@media (max-width: 667px) {
+  .text-align-end {
+    text-align: left;
+  }
+}

@@ -1,0 +1,100 @@
+<div class="row mt-1">
+  <span class="fs-2 fw-bolder ms-3">Cart</span>
+
+</div>
+<div class="row ms-3 mt-4" *ngIf="productList&&productList.length>0; else emptyTemplate" >
+  <div class="col-md-8">
+    <div class="p-3 border rounded mt-1 bg-white">
+      <table class="table table-border table-sm table-responsive mt-1" >
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Product</th>
+            <th scope="col" class="col-qty">Quantity</th>
+            <th scope="col" class="text-end pe-3">Price</th>
+            <th scope="col" class="text-end pe-3">SubTotal</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of productList; let i = index">
+            <ng-container *ngIf="product && product.quantity > 0">
+              <td>
+                <img
+                  [src]="product.imageUrl"
+                  class=""
+                  height="70px"
+                  width="70px"
+                  alt="..."
+                />
+              </td>
+              <td class="pt-4">{{ product.productName }}</td>
+              <td class="text-center pt-4">
+                <div class="row">
+                  <div class="col-md-8 col-sm-12 col-xs-12">
+                    <div class="input-group input-group-sm">
+                      <button
+                        class="btn btn-secondary"
+                        type="button"
+                        id="button-addon1"
+                        (click)="addItem(product)"
+                      >
+                        +
+                      </button>
+                      <label class="form-control text-center border-0"
+                        >{{ product.quantity }} in cart</label
+                      >
+                      <button
+                        class="btn btn-secondary"
+                        type="button"
+                        id="button-addon12"
+                        (click)="removeItem(product)"
+                      >
+                        -
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="text-end pe-3 pt-4">
+                $ {{ product.price | number : "1.2-2" }}
+              </td>
+              <td class="text-end pe-3 pt-4">
+                $ {{ product.price * product.quantity | number : "1.2-2" }}
+              </td>
+              <td class="text-end pe-3 pt-4">
+                <button class="btn btn-sm btn btn-outline-danger" (click)="remove(product)">
+                  Remove
+                </button>
+              </td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="p-3 border bg-white rounded mt-1 text-center">
+      <div class="fs-3">
+        Count:<span class="fw-bold"> {{ cartCount }}</span>
+      </div>
+      <div class="fs-3">
+        Price:<span class="fw-bold fs-3">
+          $ {{ total | number : "1.2-2" }}</span
+        >
+      </div>
+      <div class="d-grid gap-2 mt-4 checkout">
+        <button class="btn btn-danger" routerLink="/my-kitchen/checkout">
+          Proceed to Checkout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #emptyTemplate>
+  <div class="empty-container text-center">
+    <img src="../assets/empty-cart-icon.png" />
+    <div><strong class="fw-bolder fs-1">Cart is empty.</strong></div>
+    <div class="fs-4">Looks like you have no items in your cart.</div>
+  </div>
+</ng-template>

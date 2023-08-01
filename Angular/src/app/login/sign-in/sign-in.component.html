@@ -1,0 +1,74 @@
+<div class="sign-in">
+  <div class="login-container">
+    <form
+      id="loginForm"
+      #signin="ngForm"
+      (ngSubmit)="signin.form.valid && onSubmit()"
+    >
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              autocomplete="off"
+              name="user_name"
+              placeholder="User Name"
+              #username="ngModel"
+              [(ngModel)]="userName"
+              required
+            />
+            <label class="form-label">User Name</label>
+          </div>
+          <span
+            class="text-danger"
+            *ngIf="
+              (username.touched || signin.submitted) &&
+              username.errors &&
+              username.errors['required']
+            "
+          >
+            Username is required
+          </span>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-12">
+          <div class="form-floating">
+            <input
+              type="password"
+              placeholder="password"
+              class="form-control"
+              autocomplete="off"
+              name="_Password"
+              #Password="ngModel"
+              [(ngModel)]="password"
+              required
+            />
+            <label class="form-label">Password</label>
+          </div>
+
+          <span
+            class="text-danger"
+            *ngIf="
+              (Password.touched || signin.submitted) &&
+              Password.errors &&
+              Password.errors['required']
+            "
+          >
+            Password is required
+          </span>
+        </div>
+      </div>
+      <div class="d-grid gap-2 mx-auto mt-3 mb-2">
+        <button class="btn btn-outline-danger" type="submit">Submit</button>
+      </div>
+      <div class="text-center">
+        No Account ? <a class="text-primary" (click)="redirect()">Create One</a>
+      </div>
+      <!-- <div class="text-center">
+        <a class="text-primary" (click)="forgot()">Forgot Password?</a>
+      </div> -->
+    </form>
+  </div>
+</div>

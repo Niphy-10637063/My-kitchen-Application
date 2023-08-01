@@ -1,0 +1,32 @@
+.sign-in {
+    background: linear-gradient(#ffe6e6, #ffff);
+    background: url(https://c1.wallpaperflare.com/preview/853/796/1008/chopping-board-board-kitchen-wooden.jpg);
+    background-repeat:no-repeat;
+    background-position:center;
+    height: 100%;
+    background-size: cover;
+    .login-container {
+      display: grid;
+      min-height: calc(100vh - 100px);
+      width: 100%;
+      height: 100%;
+      align-content: center;
+      justify-content: center;
+  
+      #loginForm {
+        overflow: hidden;
+      //   height: 280px;
+        border-radius: 10px;
+        min-width: 350px;
+        border: 1px solid  #c32232;;
+        padding: 40px;
+        background-color: white;
+        a{
+          text-decoration: none;
+          cursor: pointer;
+          // padding: 3px;
+        }
+      }
+    }
+  }
+  

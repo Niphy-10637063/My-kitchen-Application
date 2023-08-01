@@ -1,0 +1,15 @@
+<span class="mb-0" mat-dialog-title>Cancel order</span>
+<div mat-dialog-content>
+  <div class="confirm-wrap">
+    <span class="icon-wrap">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+    </span>
+    <div class="message">Are you sure you want to cancel the order ?</div>
+  </div>
+</div>
+<div mat-dialog-actions align="end">
+  <button class="btn btn-outline-danger" [mat-dialog-close]="'Yes'" cdkFocusInitial>
+    Yes
+  </button>
+  <button class="btn btn-linght" [mat-dialog-close]="'No'">No</button>
+</div>

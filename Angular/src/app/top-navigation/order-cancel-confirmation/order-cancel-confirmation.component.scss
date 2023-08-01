@@ -1,0 +1,20 @@
+.confirm-wrap {
+    min-width: 250px;
+    max-width: 500px;
+    display: grid;
+    grid-template-columns: 55px auto;
+  
+    .icon-wrap {
+      padding: 10px;
+  
+      .fa-triangle-exclamation {
+        font-size: xx-large;
+        color: red;
+      }
+    }
+}
+.message {
+  font-size: small;
+  display: grid;
+  align-content: center;
+}

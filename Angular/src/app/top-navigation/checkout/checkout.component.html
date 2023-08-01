@@ -1,0 +1,182 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="border m-4 border-2 border-dark-subtle rounded p-4">
+      <span class="fs-3 fw-bold">Address Details</span>
+      <form #orderForm="ngForm">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input
+                type="text"
+                placeholder="First Name"
+                class="form-control"
+                name="first_Name"
+                [(ngModel)]="firstName"
+                id="exampleInputPassword1"
+                required
+                #fNameRef="ngModel"
+              />
+              <label for="exampleInputPassword1" class="form-label"
+                >First Name</label
+              >
+            </div>
+            <ng-container
+              *ngIf="fNameRef.invalid && (fNameRef.dirty || fNameRef.touched)"
+            >
+              <div *ngIf="fNameRef.errors?.['required']" class="text-danger">
+                Firstname is required.
+              </div>
+            </ng-container>
+          </div>
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input
+                type="text"
+                placeholder="Last Name"
+                class="form-control"
+                id="exampleInputPassword2"
+                name="last_Name"
+                #lastNameRef="ngModel"
+                [(ngModel)]="lastName"
+                required
+              />
+              <label for="exampleInputPassword1" class="form-label"
+                >Last Name</label
+              >
+            </div>
+            <ng-container
+              *ngIf="
+                lastNameRef.invalid &&
+                (lastNameRef.dirty || lastNameRef.touched)
+              "
+            >
+              <div *ngIf="lastNameRef.errors?.['required']" class="text-danger">
+                Lastname is required.
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input
+                type="text"
+                [(ngModel)]="contactNo"
+                name="contactNumber"
+                class="form-control"
+                pattern="^(?:\+343|0)\d{9}$"
+                placeholder="(0|+343)XXXXXXXXX"
+                id="em"
+                required
+                #mobileNo="ngModel"
+              />
+              <label for="floatingTextarea">Contact Number</label>
+            </div>
+            <ng-container
+              *ngIf="mobileNo.invalid && (mobileNo.dirty || mobileNo.touched)"
+            >
+              <div *ngIf="mobileNo.errors?.['required']" class="text-danger">
+                Contact number is required.
+              </div>
+
+              <div *ngIf="mobileNo.errors?.['pattern']" class="text-danger">
+                Please enter a valid contact number
+              </div>
+            </ng-container>
+          </div>
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input
+                type="email"
+                class="form-control"
+                disabled
+                id="exampleInputEmail1"
+                placeholder="Email Id"
+                [(ngModel)]="email"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$"
+                required
+                #emailID="ngModel"
+                name="_email"
+                aria-describedby="emailHelp"
+              />
+              <label for="exampleInputEmail1" class="form-label"
+                >Email address</label
+              >
+            </div>
+            <ng-container
+              *ngIf="emailID.invalid && (emailID.dirty || emailID.touched)"
+            >
+              <div *ngIf="emailID.errors?.['required']" class="text-danger">
+                Email is required.
+              </div>
+              <div *ngIf="emailID.errors?.['pattern']" class="text-danger">
+                Please enter a valid email ID
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-12">
+            <div class="form-floating">
+              <textarea
+                class="form-control"
+                placeholder="Address"
+                name="_address"
+                [(ngModel)]="address"
+                id="floatingTextarea"
+                #addressRef="ngModel"
+                required
+              ></textarea>
+              <label for="floatingTextarea">Address</label>
+            </div>
+            <ng-container
+              *ngIf="
+                addressRef.invalid && (addressRef.dirty || addressRef.touched)
+              "
+            >
+              <div *ngIf="addressRef.errors?.['required']" class="text-danger">
+                Address is required.
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </form>
+      <button
+        type="button"
+        [disabled]="
+          !orderForm.valid ||
+          submitted ||
+          !productList ||
+          productList.length == 0
+        "
+        (click)="addOrder(orderForm)"
+        class="btn btn-outline-danger mt-3"
+      >
+        Place Order
+      </button>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="border m-4 border-2 border-dark-subtle rounded p-4">
+      <span class="fs-3 fw-bold">Order Summary</span>
+      <div>You have {{ total.count }} items in your cart</div>
+      <table class="table">
+        <tbody>
+          <tr *ngFor="let product of productList">
+            <td>
+              {{ product.quantity }}<span class="ms-2 me-2"> * </span>
+              {{ product.productName }}
+            </td>
+            <td class="text-end">
+              $ {{ product.quantity * product.price | number : "1.2-2" }}
+            </td>
+          </tr>
+          <tr>
+            <th>Total</th>
+            <th class="text-end">$ {{ total.price | number : "1.2-2" }}</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

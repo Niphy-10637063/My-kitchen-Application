@@ -1,0 +1,45 @@
+.input-group {
+  width: 350px !important;
+  .search {
+    color: white !important;
+    background-color: #c32232 !important;
+  }
+}
+.categories {
+  font-size: larger;
+  overflow-x: auto;
+  .badge {
+    cursor: pointer;
+  }
+  .text-bg-secondary {
+    background-color: #e6e6e6 !important;
+    color: rgb(69, 69, 202) !important;
+    // min-width: 110px;
+    margin-right: 3px;
+    margin-top: 2px;
+  }
+  .active {
+    background-color: rgb(69, 69, 202) !important;
+    color: white !important;
+  }
+}
+.pointer {
+  cursor: pointer !important;
+}
+.card-body {
+  .card-title {
+    color: #c32232 !important;
+  }
+  text-align: left !important;
+
+
+}
+
+.fa-heart-favourite {
+  color: #c32232 !important;
+  cursor: pointer;
+}
+.fa-star {
+  color: #f5bd02 !important;
+}
+

@@ -1,0 +1,31 @@
+.navbar {
+  background: linear-gradient(#faf1f1, #ffff);
+  .navbar-collapse {
+    justify-content: end;
+  }
+  .navbar-brand {
+    color: #c32232;
+    font-weight: bolder;
+    cursor: pointer;
+    // font-size: 30px !important;
+    .fa-kitchen-set{
+        font-size: 30px !important;
+    }
+  }
+  .nav-item{
+    cursor: pointer;
+  }
+  .nav-link {
+    color: #c32232;
+  }
+}
+.dropdown-toggle{
+  border: none !important;
+  color: #c32232;
+  // width: 40px;
+  // height: 40px;
+  margin-top: 8px;
+  // background-color: #c32232;
+  // color:white;
+  text-decoration: none;
+}

@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>
+  <b *ngIf="categoryID!==0&&categoryID!=undefined&&categoryID>0 else add">Edit Category</b>
+  <ng-template #add><b>Add Category</b></ng-template>
+</h1>
+<mat-dialog-content>
+  <form id="product" #pdtForm="ngForm">
+    <div class="mb-3 mt-1">
+      <label class="form-label" >Category Name</label>
+      <input
+        type="text"
+        class="form-control"
+        #pname="ngModel"
+        [(ngModel)]="category"
+        name="pdtname"
+        required
+      />
+      <ng-container *ngIf="pname.invalid && (pname.dirty || pname.touched)">
+        <div *ngIf="pname.errors?.['required']" class="text-danger">
+          Category name is required.
+        </div>
+      </ng-container>
+    </div>
+    <div class="mb-3 mt-1">
+      <label class="form-label">Description</label>
+      <textarea
+        type="text"
+        class="form-control"
+        #desc="ngModel"
+        [(ngModel)]="description"
+        name="desc1"
+        required
+      ></textarea>
+      <ng-container *ngIf="desc.invalid && (desc.dirty || desc.touched)">
+        <div *ngIf="desc.errors?.['required']" class="text-danger">
+          Description is required.
+        </div>
+      </ng-container>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="float-end gap-1">
+  <button class="btn btn-light" mat-dialog-close>Close</button>
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button
+    mat-button
+    type="button"
+    (click)="save(pdtForm)"
+    class="btn btn-primary"
+    [disabled]="!pdtForm.valid||submitted"
+  >
+  <i class="fa fa-spinner fs-6 fa-spin" *ngIf="submitted"> </i>
+    Submit
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,217 @@
+<h1 mat-dialog-title>
+  <b
+    *ngIf="productID !== 0 && productID != undefined && productID > 0; else add"
+    >Edit Product</b
+  >
+  <ng-template #add><b>Add Product</b></ng-template>
+</h1>
+<mat-dialog-content>
+  <form id="product" #pdtForm="ngForm">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-3 mt-1">
+          <label class="form-label">Category</label>
+          <select
+            class="form-select"
+            required
+            placeholder="Select Category"
+            [(ngModel)]="category"
+            name="cat"
+            #cate="ngModel"
+          >
+            <option selected value="">Select Category</option>
+            <option
+              *ngFor="let category of data.categories"
+              [value]="category.id"
+            >
+              {{ category.categoryName }}
+            </option>
+          </select>
+          <ng-container *ngIf="cate.invalid && (cate.dirty || cate.touched)">
+            <div *ngIf="cate.errors?.['required']" class="text-danger">
+              Category is required.
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3 mt-1">
+          <label class="form-label">Product Name</label>
+          <input
+            type="text"
+            class="form-control"
+            #pname="ngModel"
+            [(ngModel)]="productName"
+            name="pdtname"
+            required
+          />
+          <ng-container *ngIf="pname.invalid && (pname.dirty || pname.touched)">
+            <div *ngIf="pname.errors?.['required']" class="text-danger">
+              Product name is required.
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label class="form-label">Rate</label>
+          <input
+            type="number"
+            class="form-control"
+            #p_rate="ngModel"
+            [(ngModel)]="rate"
+            name="pdtrate"
+            required
+          />
+          <ng-container
+            *ngIf="p_rate.invalid && (p_rate.dirty || p_rate.touched)"
+          >
+            <div *ngIf="p_rate.errors?.['required']" class="text-danger">
+              Rate is required.
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label class="form-label">Cooking Time</label>
+          <input
+            type="text"
+            class="form-control"
+            #p_time="ngModel"
+            [(ngModel)]="time"
+            name="tim"
+            required
+          />
+          <ng-container
+            *ngIf="p_time.invalid && (p_time.dirty || p_time.touched)"
+          >
+            <div *ngIf="p_time.errors?.['required']" class="text-danger">
+              Cooking time is required.
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Image Url</label>
+      <input
+        [(ngModel)]="imageUrl"
+        type="text"
+        required
+        name="img"
+        #img_url="ngModel"
+        class="form-control"
+      />
+      <ng-container
+        *ngIf="img_url.invalid && (img_url.dirty || img_url.touched)"
+      >
+        <div *ngIf="img_url.errors?.['required']" class="text-danger">
+          imageUrl is required
+        </div>
+      </ng-container>
+    </div>
+    <div class="mb-3 mt-1">
+      <label class="form-label">Description</label>
+      <textarea
+        type="text"
+        class="form-control"
+        #desc="ngModel"
+        [(ngModel)]="description"
+        name="desc1"
+        required
+      ></textarea>
+      <ng-container *ngIf="desc.invalid && (desc.dirty || desc.touched)">
+        <div *ngIf="desc.errors?.['required']" class="text-danger">
+          Description is required.
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- <img
+      [src]="imageSrc"
+      *ngIf="imageSrc"
+      style="height: 200px; width: 200px"
+    /> -->
+  </form>
+  <div class="border p-3">
+    <span><b>Add Tags</b></span>
+    <form #tagForm="ngForm">
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label">Tag</label>
+            <input
+              type="text"
+              class="form-control"
+              #p_tag="ngModel"
+              [(ngModel)]="tagName"
+              name="tag_Name"
+              required
+            />
+            <ng-container
+              *ngIf="p_tag.invalid && (p_tag.dirty || p_tag.touched)"
+            >
+              <div *ngIf="p_tag.errors?.['required']" class="text-danger">
+                Tag is required.
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <button class="btn btn-primary mt-4" (click)="addTags(tagForm)" [disabled]="!tagForm.valid">
+            Add
+          </button>
+        </div>
+      </div>
+    </form>
+    <ng-container *ngIf="tagList && tagList.length > 0">
+      <mat-table #table [dataSource]="dataSource" class="border" matSort>
+        <ng-container matColumnDef="tagName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            <b>Tag</b>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.tagName }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+          <mat-cell *matCellDef="let element;let i=index">
+            <button
+              class="btn btn-danger btn-md"
+              (click)="deleteTag(i)"
+            >
+              <i
+                class="fa-solid fa-trash"
+                *ngIf="!element.IsDeleteCategory"
+              ></i>
+              <i
+                class="fa fa-spinner fs-6 fa-spin"
+                *ngIf="element.IsDeleteCategory"
+              >
+              </i>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+    </ng-container>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="float-end gap-1">
+  <button class="btn btn-light" mat-dialog-close>Close</button>
+  <button
+    mat-button
+    class="btn btn-primary"
+    (click)="addProduct(pdtForm)"
+    [disabled]="!pdtForm.valid||submitted"
+  >
+    <i class="fa fa-spinner fs-6 fa-spin" *ngIf="submitted"> </i>
+    Submit
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,106 @@
+<div class="row mt-5">
+  <div class="col-lg-12 text-center d-flex justify-content-center">
+    <div class="input-group">
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        class="form-control"
+        name="search"
+        placeholder="Search My Kitchen"
+        aria-label="Recipient's username"
+        aria-describedby="button-addon2"
+      />
+      <button
+        class="btn btn-outline-secondary search"
+        type="button"
+        (click)="clear()"
+        id="button-addon211"
+      >
+        Clear
+      </button>
+    </div>
+  </div>
+  <div
+    class="col-lg-12 col-sm-12 text-center d-flex justify-content-center mt-5 categories"
+  >
+    <span
+      class="badge rounded-pill text-bg-secondary"
+      [class.active]="selectedCategoryId == null||selectedCategoryId == ''||!selectedCategoryId"
+      (click)="navigate('')"
+      >All ({{ totalProductCount }})</span
+    >
+    <ng-container *ngFor="let category of categories">
+      <span
+        class="badge rounded-pill text-bg-secondary"
+        [class.active]="selectedCategoryId == category.id"
+        (click)="navigate(category)"
+      >
+        {{ category.categoryName }} ({{ category.productCount }})
+      </span>
+    </ng-container>
+  </div>
+</div>
+<div class="row text-center justify-content-center d-flex ms-2">
+  <ng-container
+    *ngIf="productList && productList.length > 0; else emptyTemplate"
+  >
+    <div
+      class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-4"
+      *ngFor="
+        let product of productList | productFilter : searchText;
+        let i = index
+      "
+    >
+      <div class="card pointer" (click)="viewDetails(product)">
+        <img
+          [src]="product.imageUrl"
+          class="card-img-top"
+          height="200px"
+          alt="..."
+        />
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <span class="card-title">{{ product.productName }}</span>
+            </div>
+            <div class="col-md-6 text-end">
+              <i
+                class="fa-solid fa-heart"
+                [matTooltip]="product.isFavourite?'Remove from favourites':'Add to favourites'"
+                [class.fa-heart-favourite]="product.isFavourite"
+                (click)="addToFavourite($event, product)"
+              ></i>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <span
+                ><i class="fa-solid fa-star"></i>
+                {{ product.overallRating | number : "1.1-1" }}</span
+              >
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-8">
+              <ng-container *ngFor="let tag of product.tags">
+                <span class="badge rounded-pill text-bg-secondary">
+                  {{ tag.tagName }}
+                </span>
+              </ng-container>
+            </div>
+            <div class="col-md-4 text-end">
+              <i class="fa-regular fa-clock pe-1"></i>{{ product.time }}
+            </div>
+          </div>
+
+          <p class="card-text mt-2">$ {{ product.price | number : "1.2-2" }}</p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #emptyTemplate>
+    <div class="empty-container text-center mt-5">
+      <img src="../assets/no-search-found.png" />
+    </div>
+  </ng-template>
+</div>

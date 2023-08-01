@@ -1,0 +1,73 @@
+<div class="row mt-1">
+  <span class="fs-2 fw-bolder ms-3">My Favourites</span>
+</div>
+<div
+  class="row ms-3 mt-4"
+  *ngIf="favourites && favourites.length > 0; else emptyTemplate"
+>
+  <div class="col-md-6">
+    <div class="p-3 border rounded mt-1 bg-white">
+      <!-- <table class="table table-border table-sm table-responsive mt-1">
+        <thead>
+          <th>Product</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let favourite of favoutites">
+            <td>favourite.product</td>
+          </tr>
+        </tbody>
+      </table> -->
+      <mat-table #table [dataSource]="dataSource" class="border table" matSort>
+        <ng-container matColumnDef="imageUrl">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            <b>Product</b>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <img
+              [src]="element.imageUrl"
+              height="70px"
+              width="70px"
+              alt="..."
+            />
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="productName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            <b>Product Name</b>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.productName }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="price">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            <b>Price</b>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            $ {{ element.price | number : "1.2-2" }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+          <mat-cell
+            class="d-grid justify-content-end"
+            *matCellDef="let element; let i = index"
+          >
+            <button class="btn btn-danger btn-md" (click)="remove(element)">
+              <i class="fa fa-spinner fs-6 fa-spin" *ngIf="element.isDelete">
+              </i
+              >Remove
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+</div>
+<ng-template #emptyTemplate>
+  <div class="empty-container text-center">
+    <div><strong class="fw-bolder fs-1">No favourites found</strong></div>
+  </div>
+</ng-template>

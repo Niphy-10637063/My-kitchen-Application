@@ -1,0 +1,184 @@
+<div class="sign-in">
+  <div class="login-container">
+    <form
+      id="loginForm"
+      #signup="ngForm"
+      (ngSubmit)="signup.form.valid && onSubmit()"
+    >
+      <div class="row">
+        <div class="col-md-12">
+          <label class="form-label">Email ID</label>
+          <input
+            type="text"
+            [pattern]="emailPattern"
+            class="form-control"
+            autocomplete="off"
+            name="email"
+            placeholder="Email ID"
+            #emailID="ngModel"
+            [(ngModel)]="emailId"
+            required
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              (emailID.touched || signup.submitted) &&
+              emailID.errors &&
+              emailID.errors['required']
+            "
+          >
+            Email is required
+          </span>
+          <span
+            class="text-danger"
+            *ngIf="
+              (emailID.touched || signup.submitted) &&
+              emailID.errors &&
+              emailID.errors['pattern']
+            "
+          >
+            Please enter a valid email ID
+          </span>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-12">
+          <label class="form-label">User Name</label>
+          <input
+            type="text"
+            class="form-control"
+            autocomplete="off"
+            placeholder="User Name"
+            pattern="^(?=.*[a-zA-Z])[a-zA-Z0-9]+$"
+            minlength="3"
+            name="user_name"
+            #username="ngModel"
+            [(ngModel)]="userName"
+            required
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              (username.touched || signup.submitted) &&
+              username.errors &&
+              username.errors['required']
+            "
+          >
+            Username is required
+          </span>
+          <div
+            class="text-danger"
+            *ngIf="
+              (username.touched || signup.submitted) &&
+              username.errors &&
+              username.errors['pattern']
+            "
+          >
+            Username should be alphanumeric, also no spaces
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="
+              (username.touched || signup.submitted) &&
+              username.errors &&
+              username.errors['minlength']
+            "
+          >
+            Username is too short
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-12">
+          <label class="form-label"
+            >Password
+            <a
+              tabindex="0"
+              role="button"
+              data-bs-toggle="popover"
+              data-bs-trigger="hover focus"
+              data-bs-title="Password Criteria"
+              data-content-id="popover-content"
+            >
+              <i
+                class="fa-solid fa-circle-info ms-1"
+                [class.text-danger]="
+                  (Password.touched || signup.submitted) &&
+                  Password.errors &&
+                  Password.errors['pattern']
+                "
+              ></i></a
+          ></label>
+          <input
+            type="password"
+            class="form-control"
+            autocomplete="off"
+            placeholder="Password"
+            name="_Password"
+            #Password="ngModel"
+            [(ngModel)]="password"
+            pattern="(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$"
+            required
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              (Password.touched || signup.submitted) &&
+              Password.errors &&
+              Password.errors['required']
+            "
+          >
+            Password is required
+          </span>
+          <span
+            class="text-danger"
+            *ngIf="
+              (Password.touched || signup.submitted) &&
+              Password.errors &&
+              Password.errors['pattern']
+            "
+          >
+            Password should meet the criteria specified
+          </span>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-12">
+          <label class="form-label"> Confirm Password</label>
+          <input
+            type="password"
+            class="form-control"
+            autocomplete="off"
+            placeholder="Re-type Password"
+            name="c_Password"
+            #cPassword="ngModel"
+            [(ngModel)]="confirmPassword"
+            required
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              (cPassword.touched || signup.submitted) &&
+              cPassword.errors &&
+              cPassword.errors['required']
+            "
+          >
+            Confirm password is required
+          </span>
+          <div
+            *ngIf="confirmPassword && password && confirmPassword !== password"
+            class="text-danger"
+          >
+            Password mismatch found
+          </div>
+        </div>
+      </div>
+      <div class="d-grid gap-2 mx-auto mt-3 mb-2">
+        <button class="btn btn-outline-danger" type="submit"><i class="fa fa-spinner fs-6 fa-spin" *ngIf="submitted"> </i>Submit</button>
+      </div>
+      <div class="text-center">
+        <a class="text-primary" (click)="redirect()">Sign in</a>
+      </div>
+    </form>
+  </div>
+</div>

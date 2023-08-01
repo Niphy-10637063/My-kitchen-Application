@@ -1,0 +1,63 @@
+<div class="container" *ngIf="product">
+  <div class="row">
+    <div class="col-lg-6 col-md-6">
+      <img [src]="product.imageUrl" class="img-fluid" alt="..." />
+    </div>
+    <div class="col-lg-6 col-md-6 details">
+      <div class="row fs-3 fw-bolder">
+        <div class="col-md-8 col-sm-6 col-xs-12">{{ product.productName }}</div>
+        <div class="col-md-4 col-sm-6 col-xs-12 text-align-end">
+          <i
+            class="fa-solid fa-heart" [matTooltip]="product.isFavourite?'Remove from favourites':'Add to favourites'"
+            [class.fa-heart-favourite]="product.isFavourite"
+            (click)="addToFavourite(product)"
+          ></i>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <span
+            ><i class="fa-solid fa-star"></i>
+            {{ product.overallRating | number : "1.1-1" }}</span
+          >
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-12">
+          <ng-container *ngFor="let tag of product.tags">
+            <span class="badge rounded-pill text-bg-secondary">
+              {{ tag.tagName }}
+            </span>
+          </ng-container>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-12">
+          <span class="">
+            Time to cook about <b>{{ product.time }}</b> minutes
+          </span>
+          <div class="mt-2 fs-4">
+            Price:
+            <b class="text-success">${{ product.price | number : "1.2-2" }}</b>
+          </div>
+        </div>
+      </div>
+      <div class="d-grid mt-5">
+        <button
+          class="btn btn-danger"
+          (click)="addToCart(product)"
+          type="button"
+        >
+          Add To Cart
+        </button>
+        <button
+          class="btn btn-outline-danger mt-2"
+          (click)="addReview()"
+          type="button"
+        >
+          Reviews
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

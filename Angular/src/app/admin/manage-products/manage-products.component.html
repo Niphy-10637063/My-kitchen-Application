@@ -1,0 +1,159 @@
+<div class="container border mt-5 mb-2 p-2">
+  <button class="btn btn-primary mb-3" (click)="addCategory()">
+    Add Category
+    <i class="fa fa-spinner fs-6 fa-spin" *ngIf="submitCategory"> </i>
+  </button>
+  <div class="example-container mat-elevation-z8">
+    <div class="row">
+      <mat-form-field class="col-md-12">
+        <input matInput (keyup)="applyFilter($event)" placeholder="Filter" />
+      </mat-form-field>
+    </div>
+    <mat-table #table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="categoryName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          <b>Category</b>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.categoryName }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>
+          <b>Description</b>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.description }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button
+            class="btn btn-primary btn-md me-2"
+            (click)="editCategory(element)"
+          >
+            <i class="fa-solid fa-pen" *ngIf="!element.IsEditCategory"></i>
+            <i
+              class="fa fa-spinner fs-6 fa-spin"
+              *ngIf="element.IsEditCategory"
+            >
+            </i>
+          </button>
+          <button
+            class="btn btn-danger btn-md"
+            (click)="deleteCategory(element)"
+          >
+            <i class="fa-solid fa-trash" *ngIf="!element.IsDeleteCategory"></i>
+            <i
+              class="fa fa-spinner fs-6 fa-spin"
+              *ngIf="element.IsDeleteCategory"
+            >
+            </i>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+    <mat-paginator
+      #paginator
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      [showFirstLastButtons]="true"
+    >
+    </mat-paginator>
+  </div>
+</div>
+<div class="container border mt-5 p-2">
+  <button class="btn btn-primary mb-3" (click)="addProduct()">
+    <i class="fa fa-spinner fs-6 fa-spin" *ngIf="submitProduct"> </i>
+    Add Product
+  </button>
+  <div class="example-container mat-elevation-z8">
+    <div class="row">
+      <mat-form-field class="col-md-12">
+        <input matInput (keyup)="filterProducts($event)" placeholder="Filter" />
+      </mat-form-field>
+    </div>
+    <mat-table #table [dataSource]="productDataSource" matSort>
+      <ng-container matColumnDef="imageURL">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          <b>Product</b>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <img
+            [src]="element.imageUrl"
+            width="80px"
+            class="img-thumbnail"
+            alt="..."
+          />
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="productName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          <b>Product Name</b>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.productName }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          <b>Price</b>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.price }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>
+          <b>Description</b>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.description }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button
+            class="btn btn-primary btn-md me-2"
+            (click)="editProduct(element)"
+          >
+            <i class="fa fa-spinner fs-6 fa-spin" *ngIf="element.isEdit"> </i>
+
+            <i class="fa-solid fa-pen" *ngIf="!element.isEdit"></i>
+          </button>
+          <button
+            class="btn btn-danger btn-md"
+            (click)="deleteProduct(element)"
+          >
+            <i class="fa fa-spinner fs-6 fa-spin" *ngIf="element.isDelete"> </i>
+            <i class="fa-solid fa-trash" *ngIf="!element.isDelete"></i>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="displayedProductColumns"
+      ></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedProductColumns"></mat-row>
+    </mat-table>
+
+    <mat-paginator
+      #paginator
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      [showFirstLastButtons]="true"
+    >
+    </mat-paginator>
+  </div>
+</div>
+<!-- 
+<ng-container *ngIf="view">
+  <app-add-product></app-add-product>
+</ng-container> -->
