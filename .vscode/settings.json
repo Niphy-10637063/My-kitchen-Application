@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/fdce7fee-0a42-411a-8ed9-5a69191d9cb0/resourceGroups/My-Kitchen-Latest/providers/Microsoft.Web/sites/My-Kitchen",
+    "appService.deploySubpath": "Angular\\dist"
+}
