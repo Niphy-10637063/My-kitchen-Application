@@ -22,7 +22,8 @@ def create_app(test_config=None):
     if test_config is None:
         app.config.from_mapping(
             SECRET_KEY='4e93c30cd7d8437a509acbe762763af5f54fb07d871eacef18fe07157af91a92',
-            SQLALCHEMY_DATABASE_URI='sqlite:///mykitchen.db',
+            # SQLALCHEMY_DATABASE_URI='sqlite:///mykitchen.db',
+            SQLALCHEMY_DATABASE_URI='postgresql://mykitchendb_user:ovitXjE4NCClxIc5z8t8SY8loUateGXi@dpg-cj4lmuc5kgrc739qur70-a.oregon-postgres.render.com/mykitchendb',
             SQLALCHEMY_TRACK_MODIFICATIONS=False,
             JWT_SECRET_KEY='f0959567e0ea787588c725314e2249a31418bbdba736663923cc818640d64291',
             JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=1),
