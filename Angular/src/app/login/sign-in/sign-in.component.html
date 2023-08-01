@@ -61,7 +61,10 @@
         </div>
       </div>
       <div class="d-grid gap-2 mx-auto mt-3 mb-2">
-        <button class="btn btn-outline-danger" type="submit">Submit</button>
+        <button class="btn btn-outline-danger" type="submit">
+          <i class="fa fa-spinner fs-6 fa-spin" *ngIf="submitted"> </i>
+          Submit
+        </button>
       </div>
       <div class="text-center">
         No Account ? <a class="text-primary" (click)="redirect()">Create One</a>

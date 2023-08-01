@@ -15,7 +15,7 @@ export class AuthService {
     return this.httpService.post<any>(
       `${this.data.baseUrl}/${Strings.API_ENDPOINT_LOGIN}`,
       userCredentials,
-      6000000
+      60000
     );
   }
 

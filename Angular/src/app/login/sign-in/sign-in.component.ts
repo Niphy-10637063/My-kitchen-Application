@@ -24,6 +24,7 @@ export class SignInComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.submitted = true;
     const body: any = {
       username: this.userName,
       password: this.password,
@@ -40,7 +41,7 @@ export class SignInComponent implements OnInit {
         }
       },
       error: (error: any) => {
-        if (error && error.error && error.error.success == false){
+        if (error && error.error && error.error.success == false) {
           this.submitted = false;
           this.openSnackBar(error.error.message, true);
           if (
@@ -51,10 +52,9 @@ export class SignInComponent implements OnInit {
               '/otp-verification/' + error.error.data.email
             );
           }
-        }else{
+        } else {
           this.openSnackBar(error.message, true);
         }
-   
       },
     });
   }

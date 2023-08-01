@@ -75,7 +75,7 @@ export class DataService {
   }
   getProducts(id: number = 0): Observable<any> {
     return this.httpService.get(
-      this.baseUrl + Strings.API_ENDPOINT_GET_PRODUCTS + id,5000000
+      this.baseUrl + Strings.API_ENDPOINT_GET_PRODUCTS + id,
     );
   }
   getProductById(id: number = 0): Observable<any> {
